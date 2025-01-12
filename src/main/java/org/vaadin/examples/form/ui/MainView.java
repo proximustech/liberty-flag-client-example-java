@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 
-//import com.libertyflag.tools.FlagTool;
+import com.libertyflag.tools.FlagTool;
 
 /**
  * This is the default (and only) view in this example.
@@ -118,7 +118,6 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         */
 
 
-        /*
         HashMap<String, String> avatarFlagData = new HashMap<String, String>();
         avatarFlagData.put("client",this.parametersMap.get("client").get(0).toString());
         avatarFlagData.put("amount",this.parametersMap.get("amount").get(0).toString());
@@ -126,7 +125,6 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field",avatarFlagData)) {
             formLayout.add(avatarField);
         }
-        */ 
 
 
         formLayout.add(title);
