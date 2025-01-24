@@ -30,6 +30,8 @@ import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.router.OptionalParameter;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Location;
+import com.vaadin.flow.component.UI;
+
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
@@ -77,7 +79,7 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
          * Create the components we'll need
          */
 
-        H3 title = new H3("Signup form");
+        H3 title = new H3("DEMO Signup form");
 
         TextField firstnameField = new TextField("First name");
         TextField lastnameField = new TextField("Last name");
@@ -99,8 +101,21 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
 
         Span errorMessage = new Span();
 
-        Button submitButton = new Button("Join the community");
+        Button submitButton = new Button("SUBMIT FORM");
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+
+        H3 libertyFlagSeparator = new H3("Liberty Flag Demo Buttons:");
+        H3 htmlLine = new H3("-");
+
+        Button aProfileButton = new Button("PREMIUM PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=1234", "_self");});
+        aProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+
+        Button bProfileButton = new Button("STANDARD PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=25&user=4321", "_self");});
+        bProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+
+        Button testProfileButton = new Button("QA TEST USER", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=35&user=1111", "_self");});
+        testProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);        
 
         /*
          * Build the visible layout
@@ -119,8 +134,9 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
 
 
         HashMap<String, String> avatarFlagData = new HashMap<String, String>();
-        avatarFlagData.put("client",this.parametersMap.get("client").get(0).toString());
-        avatarFlagData.put("amount",this.parametersMap.get("amount").get(0).toString());
+        avatarFlagData.put("plan",this.parametersMap.get("plan").get(0).toString());
+        avatarFlagData.put("age",this.parametersMap.get("age").get(0).toString());
+        avatarFlagData.put("user",this.parametersMap.get("user").get(0).toString());
 
         if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field",avatarFlagData)) {
             formLayout.add(avatarField);
@@ -138,6 +154,12 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         formLayout.add(errorMessage);
         formLayout.add(submitButton);
 
+        formLayout.add(htmlLine);
+        formLayout.add(libertyFlagSeparator);
+
+        formLayout.add(aProfileButton);        
+        formLayout.add(bProfileButton);
+        formLayout.add(testProfileButton);
 
         // Restrict maximum width and center on page
         formLayout.setMaxWidth("500px");
@@ -154,6 +176,9 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         formLayout.setColspan(avatarField, 2);
         formLayout.setColspan(errorMessage, 2);
         formLayout.setColspan(submitButton, 2);
+        formLayout.setColspan(libertyFlagSeparator, 2);
+        formLayout.setColspan(htmlLine, 2);
+        formLayout.setColspan(testProfileButton, 2);
 
         // Add some styles to the error message to make it pop out
         errorMessage.getStyle().set("color", "var(--lumo-error-text-color)");
@@ -268,6 +293,7 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
                 errorMessage.setText("Saving the data failed, please try again");
             }
         });
+
 
     }
 

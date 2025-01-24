@@ -75,6 +75,8 @@ public class AvatarField extends CustomField<AvatarImage> {
         wrapper.getStyle().set("border-style", "double");
         wrapper.getStyle().set("border-color", "green");
         wrapper.getStyle().set("border-width", "15px");
+        wrapper.getStyle().set("border-radius", "25px");
+        wrapper.getStyle().set("margin-bottom", "18px");
         add(wrapper);
     }
 
