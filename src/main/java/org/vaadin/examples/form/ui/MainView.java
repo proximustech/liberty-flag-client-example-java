@@ -126,6 +126,16 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         // Java code and its defaults looks nicer than just using a VerticalLayout.
         FormLayout formLayout = new FormLayout();
 
+
+        formLayout.add(title);
+        formLayout.add(firstnameField);
+        formLayout.add(lastnameField);
+        formLayout.add(handleField);        
+        formLayout.add(passwordField1);
+        formLayout.add(passwordField2);
+        formLayout.add(allowMarketingBox);
+        formLayout.add(emailField);
+
         /*
         if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field")) {
             formLayout.add(avatarField);
@@ -141,16 +151,7 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field",avatarFlagData)) {
             formLayout.add(avatarField);
         }
-
-
-        formLayout.add(title);
-        formLayout.add(firstnameField);
-        formLayout.add(lastnameField);
-        formLayout.add(handleField);        
-        formLayout.add(passwordField1);
-        formLayout.add(passwordField2);
-        formLayout.add(allowMarketingBox);
-        formLayout.add(emailField);
+        
         formLayout.add(errorMessage);
         formLayout.add(submitButton);
 
