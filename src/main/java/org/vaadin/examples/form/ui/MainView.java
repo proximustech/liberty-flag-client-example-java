@@ -32,6 +32,8 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Location;
 import com.vaadin.flow.component.UI;
 
+import com.vaadin.flow.theme.lumo.Lumo;
+
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
@@ -126,7 +128,6 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         // Java code and its defaults looks nicer than just using a VerticalLayout.
         FormLayout formLayout = new FormLayout();
 
-
         formLayout.add(title);
         formLayout.add(firstnameField);
         formLayout.add(lastnameField);
@@ -136,12 +137,29 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         formLayout.add(allowMarketingBox);
         formLayout.add(emailField);
 
+
+        switch(FlagTool.client.getStringFlagValue("app.theme")) {
+          case "Light":
+            // code block
+            break;
+          case "Dark":
+            this.getElement().setAttribute("theme", Lumo.DARK);
+            UI.getCurrent().getPage().executeJs("document.documentElement.setAttribute('theme', 'dark');");
+            title.getStyle().set("margin-top", "15px");
+            break;
+          case "Wall":
+            this.getStyle().set("background-color", "floralwhite");
+            break;
+          default:
+            // code block
+        }
+
+
         /*
         if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field")) {
             formLayout.add(avatarField);
         }
         */
-
 
         HashMap<String, String> avatarFlagData = new HashMap<String, String>();
         avatarFlagData.put("plan",this.parametersMap.get("plan").get(0).toString());
