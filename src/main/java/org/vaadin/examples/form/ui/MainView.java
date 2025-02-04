@@ -75,13 +75,26 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
 
     private void MainView(UserDetailsService service) {
 
+        String plan="premium";
+        String age="30";
+        String user="2222";
+
+        try {
+
+            plan = this.parametersMap.get("plan").get(0).toString();
+            age = this.parametersMap.get("age").get(0).toString();
+            user = this.parametersMap.get("user").get(0).toString();
+
+        } catch (Exception e) {}   
+
         this.service = service;
 
         /*
          * Create the components we'll need
          */
 
-        H3 title = new H3("DEMO Signup form");
+        //H3 title = new H3("DEMO Signup form");
+        H3 title = new H3(String.format("(Plan %s, Age %s) Signup Form", plan,age));
 
         TextField firstnameField = new TextField("First name");
         TextField lastnameField = new TextField("Last name");
@@ -110,10 +123,10 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         H3 libertyFlagSeparator = new H3("Liberty Flag Demo Buttons:");
         H3 htmlLine = new H3("-");
 
-        Button aProfileButton = new Button("PREMIUM PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=1234", "_self");});
+        Button aProfileButton = new Button("PREMIUM PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=2222", "_self");});
         aProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
-        Button bProfileButton = new Button("STANDARD PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=25&user=4321", "_self");});
+        Button bProfileButton = new Button("STANDARD PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=25&user=3333", "_self");});
         bProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
         Button testProfileButton = new Button("QA TEST USER", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=35&user=1111", "_self");});
@@ -159,12 +172,13 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field")) {
             formLayout.add(avatarField);
         }
-        */
+        */     
 
         HashMap<String, String> avatarFlagData = new HashMap<String, String>();
-        avatarFlagData.put("plan",this.parametersMap.get("plan").get(0).toString());
-        avatarFlagData.put("age",this.parametersMap.get("age").get(0).toString());
-        avatarFlagData.put("user",this.parametersMap.get("user").get(0).toString());
+
+        avatarFlagData.put("plan",plan);
+        avatarFlagData.put("age",age);
+        avatarFlagData.put("user",user);
 
         if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field",avatarFlagData)) {
             formLayout.add(avatarField);
