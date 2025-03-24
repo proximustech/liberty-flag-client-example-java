@@ -121,7 +121,12 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
 
 
         H3 libertyFlagSeparator = new H3("Liberty Flag Demo Buttons:");
-        H3 htmlLine = new H3("-");
+        Integer dashNumber = FlagTool.client.getIntegerFlagValue("app.dashes-number");
+        String dashes = "";
+        for(Integer dashesIndex=0;dashesIndex < dashNumber;dashesIndex++){
+            dashes = dashes + "-";
+        }
+        H3 htmlLine = new H3(dashes);
 
         Button aProfileButton = new Button("PREMIUM PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=2222", "_self");});
         aProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
