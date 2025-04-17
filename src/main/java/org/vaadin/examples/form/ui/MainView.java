@@ -121,9 +121,11 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
 
 
         H3 libertyFlagSeparator = new H3("Liberty Flag Demo Buttons:");
-        Integer dashNumber = FlagTool.client.getIntegerFlagValue("app.dashes-number");
+
+        Integer dashesNumber = FlagTool.client.getIntegerFlagValue("app.dashes-number",1);
+        
         String dashes = "";
-        for(Integer dashesIndex=0;dashesIndex < dashNumber;dashesIndex++){
+        for(Integer dashesIndex=0;dashesIndex < dashesNumber;dashesIndex++){
             dashes = dashes + "-";
         }
         H3 htmlLine = new H3(dashes);
@@ -155,8 +157,7 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         formLayout.add(allowMarketingBox);
         formLayout.add(emailField);
 
-
-        switch(FlagTool.client.getStringFlagValue("app.theme")) {
+        switch(FlagTool.client.getStringFlagValue("app.theme","Light")) {
           case "Light":
             // code block
             break;
@@ -174,7 +175,7 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
 
 
         /*
-        if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field")) {
+        if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field",0)) {
             formLayout.add(avatarField);
         }
         */     
@@ -185,9 +186,9 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         avatarFlagData.put("age",age);
         avatarFlagData.put("user",user);
 
-        if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field",avatarFlagData)) {
+        if (FlagTool.client.booleanFlagIsTrue("images.show-avatar-field",0,avatarFlagData)) {
             formLayout.add(avatarField);
-        }
+        }        
         
         formLayout.add(errorMessage);
         formLayout.add(submitButton);
