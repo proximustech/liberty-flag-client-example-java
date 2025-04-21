@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
 
-import com.libertyflag.tools.FlagTool;
+import net.proximustech.libertyflag.FlagTool;
 
 /**
  * This is the default (and only) view in this example.
