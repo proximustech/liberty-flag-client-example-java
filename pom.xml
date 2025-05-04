@@ -67,6 +67,12 @@
     </dependencyManagement>
 
     <dependencies>
+	<dependency>
+	    <groupId>net.proximustech.libertyflag</groupId>
+	    <artifactId>liberty-flag-java-tools</artifactId>
+	    <version>1.0</version>
+	</dependency>
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <!-- Replace artifactId with vaadin-core to use only free components -->
