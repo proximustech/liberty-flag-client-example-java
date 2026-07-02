@@ -9,11 +9,13 @@ import org.vaadin.examples.form.ui.components.AvatarField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -119,25 +121,68 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         Button submitButton = new Button("SUBMIT FORM");
         submitButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-
-        H3 libertyFlagSeparator = new H3("Liberty Flag Demo Buttons:");
-
         Integer dashesNumber = FlagTool.client.getIntegerFlagValue("app.dashes-number",1);
         
-        String dashes = "";
-        for(Integer dashesIndex=0;dashesIndex < dashesNumber;dashesIndex++){
-            dashes = dashes + "-";
-        }
-        H3 htmlLine = new H3(dashes);
+         String dashes = "";
+         for(Integer dashesIndex=0;dashesIndex < dashesNumber;dashesIndex++){
+             dashes = dashes + "✨";
+         }
+         H3 htmlLine = new H3(dashes);
+         htmlLine.getStyle().set("text-align", "center");
+         htmlLine.getStyle().set("margin", "0");
+        
+         Button aProfileButton = new Button("PREMIUM PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=2222", "_self");});
+         aProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
-        Button aProfileButton = new Button("PREMIUM PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=2222", "_self");});
-        aProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+         Button bProfileButton = new Button("STANDARD PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=25&user=3333", "_self");});
+         bProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
-        Button bProfileButton = new Button("STANDARD PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=25&user=3333", "_self");});
-        bProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
-
-        Button testProfileButton = new Button("QA TEST USER", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=35&user=1111", "_self");});
-        testProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);        
+         Button testProfileButton = new Button("QA TEST USER", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=35&user=1111", "_self");});
+         testProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+         
+          // Create a collapsible Details control with the buttons inside (responsive layout)
+          HorizontalLayout buttonsLayout = new HorizontalLayout(aProfileButton, bProfileButton, testProfileButton);
+          buttonsLayout.setSpacing(true);
+          buttonsLayout.setPadding(true);
+          buttonsLayout.setWidthFull();
+          buttonsLayout.getStyle().set("justify-content", "space-around");
+          buttonsLayout.getStyle().set("flex-wrap", "wrap");
+          buttonsLayout.getStyle().set("gap", "10px");
+          
+          // Make buttons responsive
+          aProfileButton.getStyle().set("flex", "1 1 auto");
+          aProfileButton.getStyle().set("min-width", "140px");
+          bProfileButton.getStyle().set("flex", "1 1 auto");
+          bProfileButton.getStyle().set("min-width", "140px");
+          testProfileButton.getStyle().set("flex", "1 1 auto");
+          testProfileButton.getStyle().set("min-width", "140px");
+          
+          Details libertyFlagDetails = new Details("🎬 LIBERTY FLAG TEST BUTTONS", buttonsLayout);
+          libertyFlagDetails.setOpened(false);
+          
+          // Hologram control panel styling
+          libertyFlagDetails.getStyle().set("width", "100%");
+          libertyFlagDetails.getStyle().set("box-sizing", "border-box");
+          libertyFlagDetails.getStyle().set("border-radius", "8px");
+          libertyFlagDetails.getStyle().set("border", "2px solid");
+          libertyFlagDetails.getStyle().set("border-color", "#0080FF");
+          libertyFlagDetails.getStyle().set("background", "linear-gradient(135deg, rgba(0, 128, 255, 0.02) 0%, rgba(0, 100, 200, 0.01) 100%), radial-gradient(circle at 20% 50%, rgba(0, 128, 255, 0.02) 0%, transparent 50%)");
+          libertyFlagDetails.getStyle().set("padding", "20px");
+          libertyFlagDetails.getStyle().set("box-shadow", "0 0 20px rgba(0, 128, 255, 0.1), inset 0 0 20px rgba(0, 128, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)");
+          libertyFlagDetails.getStyle().set("transition", "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)");
+          libertyFlagDetails.getStyle().set("text-shadow", "0 0 10px rgba(0, 128, 255, 0.1)");
+          libertyFlagDetails.getStyle().set("font-weight", "600");
+          libertyFlagDetails.getStyle().set("letter-spacing", "2px");
+          libertyFlagDetails.getStyle().set("position", "relative");
+          
+          // Add animation effect on open/close
+          libertyFlagDetails.addOpenedChangeListener(e -> {
+              if (e.isOpened()) {
+                  libertyFlagDetails.getStyle().set("box-shadow", "0 0 30px rgba(0, 128, 255, 0.15), inset 0 0 30px rgba(0, 128, 255, 0.08)");
+              } else {
+                  libertyFlagDetails.getStyle().set("box-shadow", "0 0 20px rgba(0, 128, 255, 0.1), inset 0 0 20px rgba(0, 128, 255, 0.05)");
+              }
+          });
 
         /*
          * Build the visible layout
@@ -193,12 +238,8 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
         formLayout.add(errorMessage);
         formLayout.add(submitButton);
 
-        formLayout.add(htmlLine);
-        formLayout.add(libertyFlagSeparator);
-
-        formLayout.add(aProfileButton);        
-        formLayout.add(bProfileButton);
-        formLayout.add(testProfileButton);
+         formLayout.add(htmlLine);
+         formLayout.add(libertyFlagDetails);
 
         // Restrict maximum width and center on page
         formLayout.setMaxWidth("500px");
@@ -211,13 +252,12 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
 
         // These components take full width regardless if we use one column or two (it
         // just looks better that way)
-        formLayout.setColspan(title, 2);
-        formLayout.setColspan(avatarField, 2);
-        formLayout.setColspan(errorMessage, 2);
-        formLayout.setColspan(submitButton, 2);
-        formLayout.setColspan(libertyFlagSeparator, 2);
-        formLayout.setColspan(htmlLine, 2);
-        formLayout.setColspan(testProfileButton, 2);
+         formLayout.setColspan(title, 2);
+         formLayout.setColspan(avatarField, 2);
+         formLayout.setColspan(errorMessage, 2);
+         formLayout.setColspan(submitButton, 2);
+         formLayout.setColspan(libertyFlagDetails, 2);
+         formLayout.setColspan(htmlLine, 2);
 
         // Add some styles to the error message to make it pop out
         errorMessage.getStyle().set("color", "var(--lumo-error-text-color)");

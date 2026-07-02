@@ -72,11 +72,15 @@ public class AvatarField extends CustomField<AvatarImage> {
         Div wrapper = new Div();
         wrapper.add(currentAvatar, upload);
         wrapper.getStyle().set("display", "flex");
-        wrapper.getStyle().set("border-style", "double");
-        wrapper.getStyle().set("border-color", "green");
-        wrapper.getStyle().set("border-width", "15px");
-        wrapper.getStyle().set("border-radius", "25px");
+        wrapper.getStyle().set("border", "3px solid");
+        wrapper.getStyle().set("border-image", "linear-gradient(135deg, #FF6B35 0%, #FFA500 50%, #FFD700 100%)");
+        wrapper.getStyle().set("border-radius", "20px");
+        wrapper.getStyle().set("background", "linear-gradient(135deg, rgba(255, 107, 53, 0.12) 0%, rgba(255, 165, 0, 0.12) 50%, rgba(255, 215, 0, 0.08) 100%)");
+        wrapper.getStyle().set("padding", "3px");
+        wrapper.getStyle().set("box-shadow", "0 12px 48px rgba(255, 107, 53, 0.3), 0 0 24px rgba(255, 165, 0, 0.25), 0 0 2px rgba(255, 215, 0, 0.5) inset");
+        wrapper.getStyle().set("backdrop-filter", "blur(6px)");
         wrapper.getStyle().set("margin-bottom", "18px");
+        wrapper.getStyle().set("transition", "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)");
         add(wrapper);
     }
 
