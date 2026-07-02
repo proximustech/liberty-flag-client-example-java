@@ -42,16 +42,19 @@ public class AvatarField extends CustomField<AvatarImage> {
 
     public AvatarField() {
 
-        // <img> that shows the current avatar
-        currentAvatar = new Image();
-        currentAvatar.setAlt("avatar image");
-        currentAvatar.setMaxHeight("100px");
-        currentAvatar.getStyle().set("margin-right", "15px");
-        currentAvatar.setVisible(false); // see updateImage()
+         // <img> that shows the current avatar
+         currentAvatar = new Image();
+         currentAvatar.setAlt("avatar image");
+         currentAvatar.setMaxHeight("100px");
+         currentAvatar.setMaxWidth("100px");
+         currentAvatar.getStyle().set("margin-right", "16px");
+         currentAvatar.getStyle().set("border-radius", "8px");
+         currentAvatar.getStyle().set("object-fit", "cover");
+         currentAvatar.setVisible(false); // see updateImage()
 
-        // create the upload component and delegate actions to the receiveUpload method
-        upload = new Upload(this::receiveUpload);
-        upload.getStyle().set("flex-grow", "1");
+         // create the upload component and delegate actions to the receiveUpload method
+         upload = new Upload(this::receiveUpload);
+         upload.getStyle().set("flex-grow", "1");
 
         // listen to state changes
         upload.addSucceededListener(e -> uploadSuccess(e));
@@ -68,20 +71,46 @@ public class AvatarField extends CustomField<AvatarImage> {
         // set max file size to 1 MB
         upload.setMaxFileSize(1 * 1024 * 1024);
 
-        // component layouting
-        Div wrapper = new Div();
-        wrapper.add(currentAvatar, upload);
-        wrapper.getStyle().set("display", "flex");
-        wrapper.getStyle().set("border", "3px solid");
-        wrapper.getStyle().set("border-image", "linear-gradient(135deg, #FF6B35 0%, #FFA500 50%, #FFD700 100%)");
-        wrapper.getStyle().set("border-radius", "20px");
-        wrapper.getStyle().set("background", "linear-gradient(135deg, rgba(255, 107, 53, 0.12) 0%, rgba(255, 165, 0, 0.12) 50%, rgba(255, 215, 0, 0.08) 100%)");
-        wrapper.getStyle().set("padding", "3px");
-        wrapper.getStyle().set("box-shadow", "0 12px 48px rgba(255, 107, 53, 0.3), 0 0 24px rgba(255, 165, 0, 0.25), 0 0 2px rgba(255, 215, 0, 0.5) inset");
-        wrapper.getStyle().set("backdrop-filter", "blur(6px)");
-        wrapper.getStyle().set("margin-bottom", "18px");
-        wrapper.getStyle().set("transition", "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)");
-        add(wrapper);
+          // component layouting - Material Design Card with distinct sections
+          // Force light theme for this component
+          Div wrapper = new Div();
+          wrapper.getElement().setAttribute("theme", "light");
+          wrapper.getStyle().set("display", "flex");
+          wrapper.getStyle().set("align-items", "center");
+          wrapper.getStyle().set("border-radius", "12px");
+          wrapper.getStyle().set("background", "linear-gradient(135deg, #E89450 0%, #DF8842 50%, #E59058 100%)");
+          wrapper.getStyle().set("padding", "12px");
+          wrapper.getStyle().set("box-shadow", "0 2px 4px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(232, 148, 80, 0.25)");
+          wrapper.getStyle().set("margin-bottom", "24px");
+          wrapper.getStyle().set("transition", "all 0.2s ease-in-out");
+          wrapper.getStyle().set("overflow", "hidden");
+          wrapper.getStyle().set("gap", "12px");
+          
+           // Inner section with nice gray for avatar (consistent across themes)
+           Div avatarSection = new Div();
+           avatarSection.add(currentAvatar);
+           avatarSection.getStyle().set("background", "gray");
+           avatarSection.getStyle().set("border-radius", "8px");
+           avatarSection.getStyle().set("padding", "8px");
+           avatarSection.getStyle().set("display", "flex");
+           avatarSection.getStyle().set("align-items", "center");
+           avatarSection.getStyle().set("justify-content", "center");
+           avatarSection.getStyle().set("box-shadow", "inset 0 1px 3px rgba(0, 0, 0, 0.12)");
+           
+           // Inner section for upload with theme-aware background
+           Div uploadSection = new Div();
+           uploadSection.add(upload);
+           // Use CSS variables for theme-aware styling
+           uploadSection.getStyle().set("background", "var(--lumo-base-color)");
+           uploadSection.getStyle().set("border-radius", "8px");
+           uploadSection.getStyle().set("padding", "12px");
+           uploadSection.getStyle().set("flex-grow", "1");
+           uploadSection.getStyle().set("display", "flex");
+           uploadSection.getStyle().set("align-items", "center");
+           uploadSection.getStyle().set("box-shadow", "inset 0 1px 2px rgba(0, 0, 0, 0.15)");
+         
+         wrapper.add(avatarSection, uploadSection);
+         add(wrapper);
     }
 
     /*
