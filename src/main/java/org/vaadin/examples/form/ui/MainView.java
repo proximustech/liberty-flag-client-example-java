@@ -131,17 +131,17 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
          htmlLine.getStyle().set("text-align", "center");
          htmlLine.getStyle().set("margin", "0");
         
-         Button aProfileButton = new Button("PREMIUM PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=2222", "_self");});
-         aProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+         Button aButton = new Button("PREMIUM P.", e -> {UI.getCurrent().getPage().open("/?plan=premium&age=30&user=2222", "_self");});
+         aButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
-         Button bProfileButton = new Button("STANDARD PROFILE", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=25&user=3333", "_self");});
-         bProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+         Button bButton = new Button("STANDARD P.", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=25&user=3333", "_self");});
+         bButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
 
-         Button testProfileButton = new Button("QA TEST USER", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=35&user=1111", "_self");});
-         testProfileButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
+         Button cButton = new Button("QA TEST USER", e -> {UI.getCurrent().getPage().open("/?plan=standard&age=35&user=1111", "_self");});
+         cButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS);
          
           // Create a collapsible Details control with the buttons inside (responsive layout)
-          HorizontalLayout buttonsLayout = new HorizontalLayout(aProfileButton, bProfileButton, testProfileButton);
+          HorizontalLayout buttonsLayout = new HorizontalLayout(aButton, bButton, cButton);
           buttonsLayout.setSpacing(true);
           buttonsLayout.setPadding(true);
           buttonsLayout.setWidthFull();
@@ -150,12 +150,12 @@ public class MainView extends VerticalLayout implements HasUrlParameter<String> 
           buttonsLayout.getStyle().set("gap", "10px");
           
           // Make buttons responsive
-          aProfileButton.getStyle().set("flex", "1 1 auto");
-          aProfileButton.getStyle().set("min-width", "140px");
-          bProfileButton.getStyle().set("flex", "1 1 auto");
-          bProfileButton.getStyle().set("min-width", "140px");
-          testProfileButton.getStyle().set("flex", "1 1 auto");
-          testProfileButton.getStyle().set("min-width", "140px");
+          aButton.getStyle().set("flex", "1 1 auto");
+          aButton.getStyle().set("min-width", "140px");
+          bButton.getStyle().set("flex", "1 1 auto");
+          bButton.getStyle().set("min-width", "140px");
+          cButton.getStyle().set("flex", "1 1 auto");
+          cButton.getStyle().set("min-width", "140px");
           
           Details libertyFlagDetails = new Details("🎬 LIBERTY FLAG TEST BUTTONS", buttonsLayout);
           libertyFlagDetails.setOpened(false);
